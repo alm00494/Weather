@@ -19,8 +19,11 @@ export class ForecastComponent implements OnInit {
   getForecast() {
     const apiKey = "d37bd714412491a1a9f02107a792a2d4";
     this.weatherService.getForecast(this.city, apiKey).subscribe((data) => {
+      const currentDate = new Date();
+      const endDate = new Date(currentDate.getTime() + (3 * 24 * 60 * 60 * 1000));
       this.forecast = data.list.filter((item: any) => {
-        return item.dt_txt.includes("12:00:00");
+        const itemDate = new Date(item.dt_txt);
+        return itemDate >= currentDate && itemDate < endDate && item.dt_txt.includes("12:00:00");
       });
     });
   }

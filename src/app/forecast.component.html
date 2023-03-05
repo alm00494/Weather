@@ -1,0 +1,5 @@
+<div *ngFor="let item of forecast">
+  <h2>{{ item.dt_txt | date: "MMM d, y" }}</h2>
+  <p>Temperature: {{ item.main.temp }}&deg;C</p>
+  <p>Wind Speed: {{ convertWindSpeed(item.wind.speed) }} m/s</p>
+</div>
